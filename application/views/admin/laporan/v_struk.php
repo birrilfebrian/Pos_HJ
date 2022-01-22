@@ -7,12 +7,12 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
     $b=$data->row_array();
     $date = date('d-M-Y H:i:s');  
         $connector = new WindowsPrintConnector("EPSONTM-U220Receipt");
-        $logo = EscposImage::load("./assets/img/logo.png", false);
+        // $logo = EscposImage::load("./assets/img/logo.png", false);
         $printer = new Printer($connector);
         $printer -> initialize();      
         /* Name of shop */
         $printer -> setJustification(Printer::JUSTIFY_CENTER);
-        $printer -> graphics($logo);
+        // $printer -> graphics($logo);
         $printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
         $printer -> text("Hasil Jaya\n");
         $printer -> selectPrintMode();

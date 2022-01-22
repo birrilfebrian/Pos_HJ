@@ -25,6 +25,10 @@ class Laporan extends CI_Controller{
         echo "Halaman tidak ditemukan";
     }
 	}
+	function lap_pembelian_barang(){
+		$x['data']=$this->m_laporan->get_pembelian_barang();
+		$this->load->view('admin/laporan/v_lap_pembelian',$x);
+	}
 	function lap_stok_barang(){
 		$x['data']=$this->m_laporan->get_stok_barang();
 		$this->load->view('admin/laporan/v_lap_stok_barang',$x);
