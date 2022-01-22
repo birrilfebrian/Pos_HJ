@@ -27,22 +27,14 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
         $printer -> text("--------------------------------\n"); 
         /* Title of receipt */
         $printer -> setEmphasis(true);
-        $printer -> text("Keterangan                Total");
+        $printer -> text("Barang        Qty  Harga   Total");
         $printer -> setEmphasis(false);
         foreach ($data->result_array() as $i) {
         $printer -> feed();
         $printer -> setJustification(Printer::JUSTIFY_LEFT);
-        $printer -> text($nabar=$i['d_jual_barang_nama']);
+        $printer -> text($nabar=$i['d_jual_barang_nama']."        ".$qty=$i['d_jual_qty']."   ".$harjul=$i['d_jual_barang_harjul']."   ".$total=$i['d_jual_total']);
         $printer -> feed();
-        $printer -> text($satuan=$i['d_jual_barang_satuan']   );
-        $printer -> text("      ");
-        $printer -> text($qty=$i['d_jual_qty']);
-        // $printer -> text("      ");        
-        // $printer -> text($diskon=$i['d_jual_diskon'])."";
-        $printer -> text("                ");
-        $printer -> text($harjul=$i['d_jual_barang_harjul']);
         }
-        $printer -> feed();
         $printer -> text("--------------------------------\n");
         // $printer -> setJustification(Printer::JUSTIFY_RIGHT);
         $printer -> setEmphasis(true);
@@ -51,13 +43,13 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
         $printer -> setEmphasis(false);
         $printer -> feed(); 
         $printer -> text("Tunai     :              ");        
-        $printer -> text($b['jual_jml_uang']);
+        $printer -> text("Rp.".$b['jual_jml_uang'].",-");
         $printer -> feed();
         $printer -> text("Diskon    :              ");        
-        $printer -> text($diskon=$i['d_jual_diskon']);
+        $printer -> text("Rp.".$diskon=$i['d_jual_diskon'].",-");
         $printer -> feed();
         $printer -> text("Kembalian :              ");        
-        $printer -> text($b['jual_kembalian']);
+        $printer -> text("Rp.".$b['jual_kembalian'].",-");
         $printer -> feed();
         $printer -> text("--------------------------------\n");
         /* Footer */
