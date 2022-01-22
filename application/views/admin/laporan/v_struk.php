@@ -24,12 +24,6 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
         $printer -> text("No Faktur    : ");
         $printer -> text($b['jual_nofak']);
         $printer -> feed();
-        $printer -> text("Nama Kasir   : ");
-        $printer -> text($this->session->userdata('nama'));
-        $printer -> feed();
-        $printer -> text("Nama Pembeli : ");
-        $printer -> text($b['jual_pembeli']);
-        $printer -> feed();
         $printer -> text("--------------------------------\n"); 
         /* Title of receipt */
         $printer -> setEmphasis(true);
