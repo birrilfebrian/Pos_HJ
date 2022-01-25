@@ -80,7 +80,7 @@
                     <?php echo form_hidden($i.'[rowid]', $items['rowid']); ?>
                     <tr>
                          <td><?=$items['id'];?></td>
-                         <td><?=$items['name'];?></td>
+                         <td><?php echo str_replace(' inch ','"',$items['name']); ?></td>
                          <td><?=$items['sm'];?></td>
                          <td style="text-align:center;"><?=$items['satuan'];?></td>
                          <td style="text-align:right;"><?php echo number_format($items['amount']);?></td>
@@ -117,8 +117,8 @@
                 <tr>
                     <td>
                     </td>
-                    <th>Nama Pembeli</th>
-                    <th style="text-align:right;"><input type="text" id="pembeli" name="pembeli" class="form-control input-sm" style="text-align:right;margin-bottom:5px;" required></th>
+                    <th></th>
+                    <th style="text-align:right;"><input type="hidden" value="1" id="pembeli" name="pembeli" class="form-control input-sm" style="text-align:right;margin-bottom:5px;" required></th>
                 </tr>
             </table>
             </form>
@@ -281,8 +281,8 @@
             $("#kode_brg").focus();
             var availableTags = [
             <?php foreach ($sugg->result() as $a) {
-                echo '"'.$a->barang_nama.'",';
-                echo '"'.$a->barang_id.'",';
+                echo "'".$a->barang_nama."',";
+                echo "'".$a->barang_id."',";
             }?>
             ];
             $( "#kode_brg" ).autocomplete({

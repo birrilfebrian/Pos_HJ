@@ -13,7 +13,7 @@ class M_barang extends CI_Model{
 	}
 
 	function tampil_barang(){
-		$hsl=$this->db->query("SELECT barang_id,barang_nama,barang_satuan,barang_harpok,barang_harjul,barang_harjul_grosir,barang_stok,barang_min_stok,barang_kategori_id,kategori_nama,suplier_id FROM tbl_barang JOIN tbl_kategori ON barang_kategori_id=kategori_id");
+		$hsl=$this->db->query("SELECT tbl_barang.barang_id,tbl_barang.barang_nama,tbl_barang.barang_satuan,tbl_barang.barang_harpok,tbl_barang.barang_harjul,tbl_barang.barang_harjul_grosir,tbl_barang.barang_stok,tbl_barang.barang_min_stok,tbl_barang.barang_kategori_id,tbl_kategori.kategori_nama,tbl_barang.suplier_id,tbl_suplier.suplier_nama FROM tbl_barang LEFT JOIN tbl_kategori ON barang_kategori_id=kategori_id JOIN tbl_suplier ON tbl_suplier.suplier_id=tbl_barang.suplier_id");
 		return $hsl;
 	}
 

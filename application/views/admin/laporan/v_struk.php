@@ -3,10 +3,12 @@ require_once(APPPATH.'vendor/mike42/escpos-php/autoload.php');
 use Mike42\Escpos\Printer;
 use Mike42\Escpos\EscposImage;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+// use Printer-ESCPOS-PDF-0.003\lib\Printer::ESCPOS;
+// use Printer-ESCPOS-PDF-0.003\lib\XML::Printer::ESCPOS;
 
     $b=$data->row_array();
     $date = date('d-M-Y H:i:s');  
-        $connector = new WindowsPrintConnector("EPSONTM-U220Receipt");
+        $connector = new CupsPrintConnector("Receipt_printer", $_SERVER["REMOTE_ADDR"]);
         // $logo = EscposImage::load("./assets/img/logo.png", false);
         $printer = new Printer($connector);
         $printer -> initialize();      
@@ -75,5 +77,6 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 
         /* Cut the receipt and open the cash drawer */
         $printer -> cut();
+        $printer->save_pdf('test.pdf');
         $printer -> pulse();
         $printer -> close();

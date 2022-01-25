@@ -37,14 +37,14 @@ class Penjualan extends CI_Controller{
 		$c = $this->db->query("SELECT tbl_suplier.suplier_nama	FROM tbl_barang RIGHT JOIN tbl_suplier ON tbl_barang.suplier_id=tbl_suplier.suplier_id where tbl_suplier.suplier_id = '".$i['suplier_id']."'")->row_array();
 		$data = array(
                'id'       => $i['barang_id'],
-               'name'     => $i['barang_nama'],
+               'name'     => str_replace('"'," inch ",$i['barang_nama']),
                'satuan'   => $i['barang_satuan'],
 			   'sm'    	  => $c['suplier_nama'],
                'harpok'   => $i['barang_harpok'],
-               'price'    => str_replace(",", "", $this->input->post('harjul'))-$this->input->post('diskon'),
+               'price'    => str_replace(',', '', $this->input->post('harjul'))-$this->input->post('diskon'),
                'disc'     => $this->input->post('diskon'),
                'qty'      => $this->input->post('qty'),
-               'amount'	  => str_replace(",", "", $this->input->post('harjul'))
+               'amount'	  => str_replace(',', '', $this->input->post('harjul'))
             );
 	if(!empty($this->cart->total_items())){
 		foreach ($this->cart->contents() as $items){
@@ -66,8 +66,10 @@ class Penjualan extends CI_Controller{
 	}else{
 		$this->cart->insert($data);
 	}
-
+	// echo str_replace('"','a',$i['barang_nama']),
 		redirect('admin/penjualan');
+		echo json_encode($data);
+		// die();
 	}else{
         echo "Halaman tidak ditemukan";
     }

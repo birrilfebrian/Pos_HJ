@@ -62,7 +62,7 @@ $no=0;
 <tr>
     <tr>
         <td><?php echo $no;?></td>
-        <td><?php echo $nabar;?></td>
+        <td><?php echo str_replace(' inch ','"',$nabar);?></td>
         <td><?php echo $satuan;?></td>
         <td><?php echo $qty;?></td>
         <td><?php echo 'Rp '.$harjul;?>,-</td>

@@ -64,42 +64,42 @@
                 </thead>
                 <tbody>
                 <?php 
-                    $no=0;
-                    foreach ($data->result_array() as $a):
-                        $no++;
-                        $id=$a['barang_id'];
-                        $nm=$a['barang_nama'];
-                        $satuan=$a['barang_satuan'];
-                        $harpok=$a['barang_harpok'];
-                        $harjul=$a['barang_harjul'];
-                        $harjul_grosir=$a['barang_harjul_grosir'];
-                        $stok=$a['barang_stok'];
-                        $min_stok=$a['barang_min_stok'];
-                        $kat_id=$a['barang_kategori_id'];
-                        $kat_nama=$a['kategori_nama'];
-                        $suplier_id=$a['suplier_id'];
-                        $b = $this->db->query("select suplier_nama from tbl_suplier where suplier_id ='".$suplier_id."'")->row_array();
-                        $sup_nama = $b['suplier_nama'];
+                    // $no=0;
+                    // foreach ($data->result_array() as $a):
+                    //     $no++;
+                    //     $id=$a['barang_id'];
+                    //     $nm=$a['barang_nama'];
+                    //     $satuan=$a['barang_satuan'];
+                    //     $harpok=$a['barang_harpok'];
+                    //     $harjul=$a['barang_harjul'];
+                    //     $harjul_grosir=$a['barang_harjul_grosir'];
+                    //     $stok=$a['barang_stok'];
+                    //     $min_stok=$a['barang_min_stok'];
+                    //     $kat_id=$a['barang_kategori_id'];
+                    //     $kat_nama=$a['kategori_nama'];
+                    //     $suplier_id=$a['suplier_id'];
+                    //     $b = $this->db->query("select suplier_nama from tbl_suplier where suplier_id ='".$suplier_id."'")->row_array();
+                    //     $sup_nama = $b['suplier_nama'];
                 ?>
-                    <tr>
-                        <td style="text-align:center;"><?php echo $no;?></td>
-                        <td><?php echo $id;?></td>
-                        <td><?php echo $nm;?></td>
-                        <td style="text-align:center;"><?php echo $satuan;?></td>
-                        <td style="text-align:right;"><?php echo 'Rp '.number_format($harpok);?></td>
-                        <td style="text-align:right;"><?php echo 'Rp '.number_format($harjul);?></td>
-                        <td style="text-align:right;"><?php echo 'Rp '.number_format($harjul_grosir);?></td>
-                        <td style="text-align:center;"><?php echo $stok;?></td>
-                        <td style="text-align:center;"><?php echo $min_stok;?></td>
-                        <td><?php echo $kat_nama;?></td>
-                        <td style="text-align:center;"><?php echo $sup_nama;?></td>
+                    <!-- <tr>
+                        <td style="text-align:center;"><?php // echo $no;?></td>
+                        <td><?php//  echo $id;?></td>
+                        <td><?php // echo $nm;?></td>
+                        <td style="text-align:center;"><?php // echo $satuan;?></td>
+                        <td style="text-align:right;"><?php // echo 'Rp '.number_format($harpok);?></td>
+                        <td style="text-align:right;"><?php // echo 'Rp '.number_format($harjul);?></td>
+                        <td style="text-align:right;"><?php // echo 'Rp '.number_format($harjul_grosir);?></td>
+                        <td style="text-align:center;"><?php // echo $stok;?></td>
+                        <td style="text-align:center;"><?php // echo $min_stok;?></td>
+                        <td><?php // echo $kat_nama;?></td>
+                        <td style="text-align:center;"><?php // echo $sup_nama;?></td>
                         <td style="text-align:center;">
-                            <a class="btn btn-xs btn-warning" href="#modalEditPelanggan<?php echo $id?>" data-toggle="modal" title="Edit"><span class="fa fa-edit"></span> Edit</a>
-                            <a class="btn btn-xs btn-danger" href="#modalHapusPelanggan<?php echo $id?>" data-toggle="modal" title="Hapus"><span class="fa fa-close"></span> Hapus</a>
-                            <a class="btn btn-xs btn-info" href="<?php echo base_url().'admin/barang/cetak_barcode/'.$id;?>" data-toggle="barcode" title="Barcode"><span class="glyphicon glyphicon-barcode"></span> Barcode</a>
+                            <a class="btn btn-xs btn-warning" href="#modalEditPelanggan<?php // echo $id?>" data-toggle="modal" title="Edit"><span class="fa fa-edit"></span> Edit</a>
+                            <a class="btn btn-xs btn-danger" href="#modalHapusPelanggan<?php // echo $id?>" data-toggle="modal" title="Hapus"><span class="fa fa-close"></span> Hapus</a>
+                            <a class="btn btn-xs btn-info" href="<?php // echo base_url().'admin/barang/cetak_barcode/'.$id;?>" data-toggle="barcode" title="Barcode"><span class="glyphicon glyphicon-barcode"></span> Barcode</a>
                         </td>
-                    </tr>
-                <?php endforeach;?>
+                    </tr> -->
+                <?php // endforeach;?>
                 </tbody>
             </table>
             </div>
@@ -276,7 +276,7 @@
                         <div class="form-group">
                             <label class="control-label col-xs-3" >Nama Barang</label>
                             <div class="col-xs-9">
-                                <input name="nabar" class="form-control" type="text" value="<?php echo $nm;?>" placeholder="Nama Barang..." style="width:335px;" required>
+                                <input name="nabar" class="form-control" type="text" <?php echo "value='".$nm."'"?> placeholder="Nama Barang..." style="width:335px;" required>
                             </div>
                         </div>
 
@@ -1116,7 +1116,36 @@
     <script src="<?php echo base_url().'assets/js/jquery.price_format.min.js'?>"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#mydata').DataTable();
+            $('#mydata').DataTable({
+                "processing": true,
+                "serverSide": false,
+                "ajax": {
+                    url : "<?= base_url() ?>admin/barang/storing_data",
+                    type : 'GET'
+                },
+                // "pageLength" : 5,
+                // "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, 'Todos']]
+                // ajax:{
+                // url: 'admin/barang/storing_data',
+                // dataType: 'json',
+                // contentType: 'application/json; charset=utf-8',
+                // dataSrc: ''
+                // "ajax": "",
+                // "colums": [
+                //     {"data" :"no"},
+                //     {"data" :"barang_id"},
+                //     {"data" :"barang_nama"},
+                //     {"data" :"barang_satuan"},
+                //     {"data" :"barang_harpok"},
+                //     {"data" :"barang_harjul"},
+                //     {"data" :"barang_harjul_grosir"},
+                //     {"data" :"barang_stok"},
+                //     {"data" :"barang_min_stok"},
+                //     {"data" :"kategori_nama"},
+                //     {"data" :"suplier_id"},
+                //     {"data" :"aksi"},
+                // ],
+            });
         } );
     </script>
     <script type="text/javascript">
